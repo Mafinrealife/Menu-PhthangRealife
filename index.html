@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>🔐 MENU HH5G V2 - NÂNG CAO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @keyframes bgAnim {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    body {
+      margin: 0;
+      padding: 30px;
+      font-family: monospace;
+      background: linear-gradient(270deg, #000, #0ff, #111, #00f);
+      background-size: 600% 600%;
+      animation: bgAnim 12s ease infinite;
+      color: #0ff;
+      text-align: center;
+    }
+    input, button, select {
+      width: 90%;
+      margin: 10px auto;
+      padding: 10px;
+      border: 2px solid #0ff;
+      border-radius: 8px;
+      font-size: 16px;
+      background: #111;
+      color: cyan;
+    }
+    .hidden { display: none; }
+    #menuTabs button {
+      background: #111;
+      border: 2px solid lime;
+      margin: 5px;
+      width: 45%;
+    }
+    .tabContent {
+      display: none;
+      margin-top: 15px;
+    }
+    .activeTab {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧬 MENU HH5G V2</h1>
+  <p>Nhập key để mở chức năng:</p>
+  <input type="password" id="keyInput" placeholder="🔑 Key truy cập">
+  <button onclick="checkKey()">MỞ MENU</button>
+  <div id="status"></div>
+
+  <div id="menuArea" class="hidden">
+    <h2>⚙️ Chức năng chính</h2>
+    <div id="menuTabs">
+      <button onclick="switchTab('aim')">🎯 Aim & Headshot</button>
+      <button onclick="switchTab('speed')">⚡ Speed & FPS</button>
+    </div>
+
+    <div id="aim" class="tabContent">
+      <button onclick="playClick()">🔥 Auto Headshot</button>
+      <button onclick="playClick()">🎯 AimLock</button>
+      <button onclick="playClick()">🔫 Kéo Tâm MP40</button>
+    </div>
+
+    <div id="speed" class="tabContent">
+      <button onclick="playClick()">⚡ Tăng tốc X10</button>
+      <button onclick="playClick()">🚀 Boost FPS</button>
+      <button onclick="playClick()">📶 Tối Ưu Mạng</button>
+    </div>
+  </div>
+
+  <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3" preload="auto"></audio>
+
+  <script>
+    const correctKey = "HH5gRealifeV2"; // Bạn có thể đổi key này
+
+    function checkKey() {
+      const key = document.getElementById("keyInput").value.trim();
+      const status = document.getElementById("status");
+      if (key === correctKey) {
+        status.innerText = "✅ Mở menu thành công!";
+        document.getElementById("menuArea").classList.remove("hidden");
+        playClick();
+      } else {
+        status.innerText = "❌ Sai key!";
+        navigator.vibrate(300);
+      }
+    }
+
+    function playClick() {
+      document.getElementById("clickSound").play();
+    }
+
+    function switchTab(tabId) {
+      const tabs = document.querySelectorAll(".tabContent");
+      tabs.forEach(t => t.classList.remove("activeTab"));
+      document.getElementById(tabId).classList.add("activeTab");
+      playClick();
+    }
+  </script>
+</body>
+</html>
